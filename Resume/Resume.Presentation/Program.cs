@@ -1,3 +1,5 @@
+using Resume.Presentation.Models.Entities.ResumeDbContext;
+
 namespace Resume.Presentation
 {
     public class Program
@@ -8,6 +10,7 @@ namespace Resume.Presentation
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ResumeDbContext>();
 
             var app = builder.Build();
 
