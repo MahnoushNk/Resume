@@ -41,11 +41,11 @@ namespace Resume.Presentation.Controllers
             return RedirectToAction(nameof(ListOfEducations));
         }
 
-        public async Task<IActionResult> DeleteAnEducation()
+        public async Task<IActionResult> DeleteAnEducation(int educationId )
         {
             
-            Education? education2 = await _context.Educations.FirstOrDefaultAsync(p => p.Id == 31);
-            _context.Educations.Remove(education2); 
+            Education? education = await _context.Educations.FirstOrDefaultAsync(p => p.Id == educationId);
+            _context.Educations.Remove(education); 
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(ListOfEducations));
