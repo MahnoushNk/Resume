@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Resume.Presentation.Models.Entities.Educations;
 using Resume.Presentation.Models.Entities.ResumeDbContext;
 
@@ -17,29 +18,37 @@ namespace Resume.Presentation.Controllers
         }
         #endregion
 
-        public IActionResult ListOfEducations()
+        public async Task<IActionResult> ListOfEducations()
         { 
-            List<Education> listOfEducation = _context.Educations.ToList();
+            List<Education> education = await _context.Educations.ToListAsync();
 
-            Education education = _context.Educations.OrderByDescending(p=> p.Id).First();
             return View();
         
         }
 
-        public IActionResult CreateAnEducation() 
+        public async Task<IActionResult> CreateAnEducation() 
         { 
-            Education educationDatabase = new Education()
-            {
-              
-                EducationTitle = "Master",
-                EducationDuration = "2024-2026",
-                Description = "Description"
-            };
-          
-            _context.Educations.Add(educationDatabase);
-            _context.SaveChanges();
+            Education education = new Education();
+            education.EducationDuration = "";
+            education.EducationTitle = "Title";
+            education.Description   = "Description";
 
-            return View();
+            await _context.Educations.AddAsync(education);
+            await _context.SaveChangesAsync();
+             
+            
+
+            return RedirectToAction(nameof(ListOfEducations));
+        }
+
+        public async Task<IActionResult> DeleteAnEducation()
+        {
+            
+            Education? education2 = await _context.Educations.FirstOrDefaultAsync(p => p.Id == 31);
+            _context.Educations.Remove(education2); 
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(ListOfEducations));
         }
     }
 }
