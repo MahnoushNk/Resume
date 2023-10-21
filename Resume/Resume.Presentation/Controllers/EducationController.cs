@@ -6,6 +6,7 @@ namespace Resume.Presentation.Controllers
 {
     public class EducationController : Controller
     {
+
         #region Ctor
         ResumeDbContext _dbcontext = new ResumeDbContext();
 
@@ -27,26 +28,17 @@ namespace Resume.Presentation.Controllers
 
         public IActionResult CreateAnEducation() 
         { 
-            List<Education> educationList = new List<Education>();
-            Education education = new Education()
+            Education educationDatabase = new Education()
             {
-                Id = 1,
+              
                 EducationTitle = "Master",
                 EducationDuration = "2024-2026",
-                Description = "Description",
+                Description = "Description"
             };
-            educationList.Add(education);
-            _context.Educations.Add(education);
+          
+            _context.Educations.Add(educationDatabase);
             _context.SaveChanges();
 
-                
-                  
-
-            
-
-
-             
-       
             return View();
         }
     }
