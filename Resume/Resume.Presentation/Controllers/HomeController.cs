@@ -1,32 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Resume.Presentation.Models;
+using Resume.Presentation.Models.Entities.ResumeDbContext;
 using System.Diagnostics;
 
-namespace Resume.Presentation.Controllers
+namespace Resume.Presentation.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ResumeDbContext _context;
+
+    public HomeController(ResumeDbContext context)
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        _context = context;
     }
+
+    public async Task<IActionResult> Index()
+    {
+        var mySkillsAsync = await _context.MySkills.ToListAsync();
+        var mySkillssynce =  _context.MySkills.ToList();
+        return View();
+    }
+
+   
 }
