@@ -7,7 +7,7 @@ using Resume.Domain.Model.Entitie.Expriences;
 using Resume.Presentation.Models.Entities.ResumeDbContext;
 using System.Diagnostics;
 using Resume.Domain.Model.Entitie.MySkills;
-
+using Resume.Application.DTO.Siteside.Home_Index;
 
 namespace Resume.Domain.Controllers;
 
@@ -34,14 +34,23 @@ public class HomeController : Controller
 
         List<Exprience> expriencesSynce = _context.Expriences.ToList();
 
-       /* ViewBag.MySkills = mySkillsAsync;
+        /* ViewBag.MySkills = mySkillsAsync;
 
-        ViewBag.Expriences = expriencesAsync;  
+         ViewBag.Expriences = expriencesAsync;  
 
-        ViewBag.Educations = educationsAsync;*/
+         ViewBag.Educations = educationsAsync;*/
+
+        HomeIndexModelDTO model = new HomeIndexModelDTO();
+
+        model.Educations = educationsAsync;
+
+        model.Expriences = expriencesAsync;
+
+        model.MySkills = mySkillsAsync;
+        
 
 
-        return View();
+        return View(model);
     }
 
    
