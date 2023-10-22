@@ -5,7 +5,11 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resume.presentation", "Resume.presentation", "{5FBFB757-F4DB-4304-AE2E-16B29FB4388E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resume.Presentation", "Resume.Presentation\Resume.Presentation.csproj", "{E2EC566D-FC4D-4302-92C5-42D1B20D3509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resume.Presentation", "Resume.Presentation\Resume.Presentation.csproj", "{E2EC566D-FC4D-4302-92C5-42D1B20D3509}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resume.Application", "Resume.Application", "{ED855D17-FCA6-4F91-8599-0F9732A521C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resume.Application", "Resume.Application\Resume.Application.csproj", "{3F654B5B-7EB7-4110-B0C4-1AE2B5EB1F9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +21,17 @@ Global
 		{E2EC566D-FC4D-4302-92C5-42D1B20D3509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2EC566D-FC4D-4302-92C5-42D1B20D3509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2EC566D-FC4D-4302-92C5-42D1B20D3509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F654B5B-7EB7-4110-B0C4-1AE2B5EB1F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F654B5B-7EB7-4110-B0C4-1AE2B5EB1F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F654B5B-7EB7-4110-B0C4-1AE2B5EB1F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F654B5B-7EB7-4110-B0C4-1AE2B5EB1F9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E2EC566D-FC4D-4302-92C5-42D1B20D3509} = {5FBFB757-F4DB-4304-AE2E-16B29FB4388E}
+		{3F654B5B-7EB7-4110-B0C4-1AE2B5EB1F9F} = {ED855D17-FCA6-4F91-8599-0F9732A521C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E459DAEC-51C6-40F4-8F14-64A6684FA38B}

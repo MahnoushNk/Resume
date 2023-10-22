@@ -8,36 +8,20 @@ namespace Resume.Presentation.Controllers
     public class EducationController : Controller
     {
 
-        #region Ctor
-        ResumeDbContext _dbcontext = new ResumeDbContext();
-
-        private ResumeDbContext _context;
-        public EducationController(ResumeDbContext context )
+        public EducationController()
         {
-            _context = context;
         }
-        #endregion
+       
 
         public async Task<IActionResult> ListOfEducations()
         { 
-            List<Education> education = await _context.Educations.ToListAsync();
-
             return View();
         
         }
 
         public async Task<IActionResult> CreateAnEducation() 
         { 
-            Education education = new Education();
-            education.EducationDuration = "";
-            education.EducationTitle = "Title";
-            education.Description   = "Description";
-
-            await _context.Educations.AddAsync(education);
-            await _context.SaveChangesAsync();
-             
-            
-
+          
             return RedirectToAction(nameof(ListOfEducations));
         }
 
