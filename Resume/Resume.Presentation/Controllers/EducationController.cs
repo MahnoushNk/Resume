@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Services.Implementation;
 using Resume.Application.Services.Interfaces;
-using Resume.Presentation.Models.Entities.Educations;
+using Resume.Domain.Models.Entities.Educations;
 
 namespace Resume.Presentation.Controllers
 {
@@ -16,8 +16,8 @@ namespace Resume.Presentation.Controllers
 
         public async Task<IActionResult> ListOfEducations()
         {
-            List<Education> educations = await _educationService.GetListOfEducationsAsync(); 
-            return View(educations);
+           
+            return View();
         
         }
 
