@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Resume.Application.Services.Implementation;
+using Resume.Application.Services.Interfaces;
 using Resume.Presentation.Models.Entities.Educations;
-using Resume.Presentation.Models.Entities.ResumeDbContext;
 
 namespace Resume.Presentation.Controllers
 {
     public class EducationController : Controller
     {
-
-        public EducationController()
+        private readonly IEducationService _educationService;
+        public EducationController(EducationService educationService)
         {
+           _educationService = educationService;
         }
        
 
         public async Task<IActionResult> ListOfEducations()
-        { 
-            return View();
+        {
+            List<Education> educations = await _educationService.GetListOfEducationsAsync(); 
+            return View(educations);
         
         }
 
@@ -28,9 +30,6 @@ namespace Resume.Presentation.Controllers
         public async Task<IActionResult> DeleteAnEducation(int educationId )
         {
             
-            Education? education = await _context.Educations.FirstOrDefaultAsync(p => p.Id == educationId);
-            _context.Educations.Remove(education); 
-            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(ListOfEducations));
         }

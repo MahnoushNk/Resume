@@ -7,18 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Resume.Application.Services.Implementation
 {
-    internal class EducationService : IEducationService
+   public class EducationService : IEducationService
     {
 
         #region Ctor
 
 
         private ResumeDbContext _context;
-        private int educationId;
-
+      
         public EducationService(ResumeDbContext context)
         {
             _context = context;
@@ -59,26 +59,26 @@ namespace Resume.Application.Services.Implementation
              _context.Educations.Add(education1);
              _context.SaveChanges();
         }
-         public async Task  DeleteAnEducationAsync(int eucationId)
+         public async Task  DeleteAnEducationAsync(int educationId)
         {
-            Education education = await GetAnEducationByIdAsync(eucationId);
+            Education education = await GetAnEducationByIdAsync(educationId);
           
           _context.Educations.Remove(education);
             await _context.SaveChangesAsync();
             
         }
 
-       public void DeleteAnEducation(int eucationId)
+       public void DeleteAnEducation(int educationId)
         {
 
-            Education education =  GetAnEducationById(eucationId);
+            Education education =  GetAnEducationById(educationId);
 
 
             _context.Educations.Remove(education);
              _context.SaveChanges();
         }
 
-        public async Task<Education> GetAnEducationByIdAsync(int eucationId)
+        public async Task<Education> GetAnEducationByIdAsync(int educationId)
         {
 
             Education? education = _context.Educations.FirstOrDefault(p => p.Id == educationId);
@@ -88,7 +88,7 @@ namespace Resume.Application.Services.Implementation
             return education;
         }
             
-       public Education GetAnEducationById(int eucationId)
+       public Education GetAnEducationById(int educationId)
         {
 
             Education? education = _context.Educations.FirstOrDefault(p => p.Id == educationId);
