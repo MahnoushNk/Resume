@@ -1,45 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Services.Implementation;
+using Resume.Application.Services.Interfaces;
 using Resume.Presentation.Models.Entities.Educations;
-using Resume.Presentation.Models.Entities.ResumeDbContext;
 
 namespace Resume.Presentation.Controllers
 {
     public class EducationController : Controller
     {
-
-        #region Ctor
-        ResumeDbContext _dbcontext = new ResumeDbContext();
-
-        private ResumeDbContext _context;
-        public EducationController(ResumeDbContext context )
+        private readonly IEducationService _educationService;
+        public EducationController(EducationService educationService)
         {
-            _context = context;
+           _educationService = educationService;
         }
-        #endregion
+       
 
-        public IActionResult ListOfEducations()
-        { 
-            List<Education> listOfEducation = _context.Educations.ToList();
-
-            Education education = _context.Educations.OrderByDescending(p=> p.Id).First();
-            return View();
+        public async Task<IActionResult> ListOfEducations()
+        {
+            List<Education> educations = await _educationService.GetListOfEducationsAsync(); 
+            return View(educations);
         
         }
 
-        public IActionResult CreateAnEducation() 
+        public async Task<IActionResult> CreateAnEducation() 
         { 
-            Education educationDatabase = new Education()
-            {
-              
-                EducationTitle = "Master",
-                EducationDuration = "2024-2026",
-                Description = "Description"
-            };
           
-            _context.Educations.Add(educationDatabase);
-            _context.SaveChanges();
+            return RedirectToAction(nameof(ListOfEducations));
+        }
 
-            return View();
+        public async Task<IActionResult> DeleteAnEducation(int educationId )
+        {
+            
+
+            return RedirectToAction(nameof(ListOfEducations));
         }
     }
 }

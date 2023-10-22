@@ -1,20 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\SiteSample\.idea\modules.xml" />
-    <Content Include="wwwroot\SiteSample\.idea\workspace.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\SiteSample\.idea\.gitignore" />
-    <None Include="wwwroot\SiteSample\.idea\v-card2.iml" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
@@ -30,9 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Resume.Application\Resume.Application.csproj" />
     <ProjectReference Include="..\Resume.Domain\Resume.Domain.csproj" />
-    <ProjectReference Include="..\Resume.Infrastructure\Resume.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,11 +12,7 @@ namespace Resume.Presentation.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Index(string Email, string UserName)
-        {
-            return View();
-        }
+       
 
         #endregion
 
