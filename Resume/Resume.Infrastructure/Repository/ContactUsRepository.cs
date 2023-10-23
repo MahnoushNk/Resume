@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
 using Resume.Domain.Entities.ContactUs;
 using Resume.Domain.RepositoryInterface;
 using Resume.Presentation.Models.Entities.ResumeDbContext;
@@ -22,5 +23,11 @@ public class ContactUsRepository : IContactUsRepository
 		await _Context.ContactUs.AddAsync(contact);
 		await _Context.SaveChangesAsync();
 
+	}
+
+	public async Task AddLocationToTheDataBase(ContactUsLocation location)
+	{
+		await _Context.locations.AddAsync(location);
+		await _Context.SaveChangesAsync();
 	}
 }
