@@ -18,7 +18,8 @@ public class ResumeDbContext : DbContext
   public DbSet<Exprience> Expriences { get; set; }
     public DbSet<Education> Educations { get; set; }
     public DbSet<MySkill> MySkills { get; set; }
+   public DbSet<ContactUs> ContactUs { get; set; }
 
-    public DbSet<ContactUs> ContactUs { get; set; }
+    public DbSet<ContactUsLocation> locations { get; set; }
 
 }

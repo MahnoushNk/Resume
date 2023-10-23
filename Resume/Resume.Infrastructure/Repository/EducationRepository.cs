@@ -5,21 +5,20 @@ using Resume.Domain.Models.Entities.Educations;
 using Resume.Domain.RepositoryInterface;
 using Resume.Presentation.Models.Entities.ResumeDbContext;
 
-namespace Resume.Infrastructure.Repository
+namespace Resume.Infrastructure.Repository;
+
+public class EducationRepository : IEducationRepository
 {
-	public class EducationRepository : IEducationRepository
+	private readonly ResumeDbContext _context;
+
+	public EducationRepository(ResumeDbContext context)
 	{
-		private readonly ResumeDbContext _context;
+		_context = context;
+	}
 
-		public EducationRepository(ResumeDbContext context)
-		{
-			_context = context;
-		}
+	public List<Education> GetListOfEducations()
+	{
+		return _context.Educations.ToList();
 
-		public List<Education> GetListOfEducations()
-		{
-			return _context.Educations.ToList();
-
-		}
 	}
 }
