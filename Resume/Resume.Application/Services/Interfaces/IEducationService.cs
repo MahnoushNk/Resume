@@ -1,4 +1,4 @@
-﻿using Resume.Presentation.Models.Entities.Educations;
+﻿using Resume.Domain.Models.Entities.Educations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

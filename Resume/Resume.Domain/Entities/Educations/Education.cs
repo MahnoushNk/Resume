@@ -1,4 +1,4 @@
-﻿namespace Resume.Presentation.Models.Entities.Educations;
+﻿namespace Resume.Domain.Models.Entities.Educations;
 
 public class Education
 {

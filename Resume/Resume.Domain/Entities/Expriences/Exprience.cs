@@ -1,4 +1,4 @@
-﻿namespace Resume.Presentation.Models.Entities.Expriences;
+﻿namespace Resume.Domain.Model.Entitie.Expriences;
 
 public class Exprience
 {
