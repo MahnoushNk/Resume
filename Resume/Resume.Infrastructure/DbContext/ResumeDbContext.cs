@@ -4,6 +4,7 @@ using Resume.Domain.Model.Entitie.MySkills;
 using Resume.Domain.Models.Entities.Educations;
 using Resume.Domain.Model.Entitie.Expriences;
 using Resume.Domain.Model.Entitie.Expriences;
+using Resume.Domain.Entities.ContactUs;
 
 namespace Resume.Presentation.Models.Entities.ResumeDbContext;
 
@@ -17,5 +18,7 @@ public class ResumeDbContext : DbContext
   public DbSet<Exprience> Expriences { get; set; }
     public DbSet<Education> Educations { get; set; }
     public DbSet<MySkill> MySkills { get; set; }
+
+    public DbSet<ContactUs> ContactUs { get; set; }
 
 }
