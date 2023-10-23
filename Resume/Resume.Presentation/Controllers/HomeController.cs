@@ -8,50 +8,57 @@ using Resume.Presentation.Models.Entities.ResumeDbContext;
 using System.Diagnostics;
 using Resume.Domain.Model.Entitie.MySkills;
 using Resume.Application.DTO.Siteside.Home_Index;
+using Resume.Domain.RepositoryInterface;
 
 namespace Resume.Domain.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ResumeDbContext _context;
+	private readonly IEducationRepository _educationRepository;
 
-    public HomeController(ResumeDbContext context)
-    {
-        _context = context;
-    }
+	private readonly IMySkillsRepository _mySkillsRepository;
 
-    public async Task<IActionResult> Index()
-    {
-        List<MySkill> mySkillsAsync = await _context.MySkills.ToListAsync();
+	private readonly IExperienceRepository _experienceRepository;
 
-        List<MySkill> mySkillsSynce =  _context.MySkills.ToList();
+	public HomeController(IEducationRepository educationRepository,
+						  IMySkillsRepository mySkillsRepository,
+						  IExperienceRepository experienceRepository)
+	{
+		_educationRepository = educationRepository;
+		_mySkillsRepository = mySkillsRepository;
+		_experienceRepository = experienceRepository;
 
-        List<Education> educationsAsync = await _context.Educations.ToListAsync();
 
-        List<Education> educationsSynce =  _context.Educations.ToList();
+	}
 
-        List<Exprience> expriencesAsync = await _context.Expriences.ToListAsync();
+	public async Task<IActionResult> Index()
+	{
+		List<MySkill> mySkills = _mySkillsRepository.GetLIstOfMySkills();
 
-        List<Exprience> expriencesSynce = _context.Expriences.ToList();
+		List<Education> educations = _educationRepository.GetListOfEducations();
 
-        /* ViewBag.MySkills = mySkillsAsync;
+		List<Exprience> expriences = _experienceRepository.GetListOfExperinces();
+
+		
+
+		/* ViewBag.MySkills = mySkillsAsync;
 
          ViewBag.Expriences = expriencesAsync;  
 
          ViewBag.Educations = educationsAsync;*/
 
-        HomeIndexModelDTO model = new HomeIndexModelDTO();
+		HomeIndexModelDTO model = new HomeIndexModelDTO();
 
-        model.Educations = educationsAsync;
+		model.Educations = educations;
 
-        model.Expriences = expriencesAsync;
+		model.Expriences = expriences;
 
-        model.MySkills = mySkillsAsync;
-        
+		model.MySkills = mySkills;
 
 
-        return View(model);
-    }
 
-   
+		return View(model);
+	}
+
+
 }
