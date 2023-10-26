@@ -1,100 +1,91 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+
+using Resume.Application.DTO.AdminSide.Education;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.Models.Entities.Educations;
-using Resume.Presentation.Models.Entities.ResumeDbContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using Resume.Domain.RepositoryInterface;
 
 namespace Resume.Application.Services.Implementation
 {
-   public class EducationService : IEducationService
-    {
+	public class EducationService : IEducationService
+	{
+		private readonly IEducationRepository _educationRepository;
 
-        #region Ctor
+		public EducationService(IEducationRepository educationRepository)
+		{
+			_educationRepository = educationRepository;
+	
+		}
 
-
-        private ResumeDbContext _context;
-      
-        public EducationService(ResumeDbContext context)
+        public async Task AddEducationToDataBase(CreateAnEducationAdminSideDTO model)
         {
-            _context = context;
+            #region ObjectMapping
+
+			Education education = new Education();
+
+			education.EducationTitle = model.EducationTitle;
+			education.EducationDuration = model.EducationDuration;
+			education.Description = model.Description;
+
+            #endregion
+
+            #region Add Education To DataBase
+
+		 await	_educationRepository.AddEducationTotDataBase(education);
+			
+            #endregion
+
 
         }
-        #endregion
 
-        public async Task<List<Education>> GetListOfEducationsAsync()
+        public async Task DeleteAnEducation(Education education)
         {
-            List<Education> education = await _context.Educations.ToListAsync();
-
-            return education;
-        }
-        public  List<Education> GetListOfEducations()
-        {
-            List<Education> education =  _context.Educations.ToList();
-
-            return education;
+            await _educationRepository.DeleteAnEducation(education);
         }
 
-       public async Task CreateAnEducationAsync(Education education)
+        public async Task EditAnEducation(Education education)
         {
-            Education education1 = new Education();
-            education.EducationDuration = "";
-            education.EducationTitle = "Title";
-            education.Description = "Description";
-
-            await _context.Educations.AddAsync(education1);
-            await _context.SaveChangesAsync();
-        }
-        public void CreateAnEducation(Education education)
-        {
-            Education education1 = new Education();
-            education.EducationDuration = "";
-            education.EducationTitle = "Title";
-            education.Description = "Description";
-
-             _context.Educations.Add(education1);
-             _context.SaveChanges();
-        }
-         public async Task  DeleteAnEducationAsync(int educationId)
-        {
-            Education education = await GetAnEducationByIdAsync(educationId);
-          
-          _context.Educations.Remove(education);
-            await _context.SaveChangesAsync();
-            
-        }
-
-       public void DeleteAnEducation(int educationId)
-        {
-
-            Education education =  GetAnEducationById(educationId);
-
-
-            _context.Educations.Remove(education);
-             _context.SaveChanges();
+          await  _educationRepository.EditAnEducation(education);
         }
 
         public async Task<Education> GetAnEducationByIdAsync(int educationId)
         {
-
-            Education? education = _context.Educations.FirstOrDefault(p => p.Id == educationId);
-
-            if (education == null) return null;
-
-            return education;
+            return await _educationRepository.GetAnEducationByIdAsync(educationId);
         }
-            
-       public Education GetAnEducationById(int educationId)
-        {
 
-            Education? education = _context.Educations.FirstOrDefault(p => p.Id == educationId);
+        public List<Education> GetListOfEducations()
+		{
+			return _educationRepository.GetListOfEducations();
+		}
 
-            return education;
-        }
-    }
+		public List<ListOfEducationsAdminSideDTO> GetListOfEducationsAdminPanel()
+
+		{
+			#region  Get List Of Educations From Database
+
+			List<Education> educations = _educationRepository.GetListOfEducations();
+
+			#endregion
+
+			#region Objact Mapping 
+
+			List<ListOfEducationsAdminSideDTO> returnModel = new List<ListOfEducationsAdminSideDTO>();
+
+			foreach (var edu in educations)
+			{
+				ListOfEducationsAdminSideDTO childModel = new ListOfEducationsAdminSideDTO();
+
+				childModel.EducationTitle = edu.EducationTitle;
+				childModel.Id = edu.Id;
+				childModel.Duration = edu.EducationDuration;
+
+				returnModel.Add(childModel);
+			}
+
+			#endregion
+
+
+			return returnModel;
+		}
+	}
 }
-

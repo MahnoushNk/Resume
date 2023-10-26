@@ -16,7 +16,32 @@ public class EducationRepository : IEducationRepository
 		_context = context;
 	}
 
-	public List<Education> GetListOfEducations()
+    public async Task AddEducationTotDataBase(Education education)
+    {
+	await	_context.Educations.AddAsync(education);
+      await _context.SaveChangesAsync();
+
+    }
+
+    public async Task DeleteAnEducation(Education education)
+    {
+
+        _context.Educations.Remove(education);
+        await _context.SaveChangesAsync();
+    }
+
+    public  async Task EditAnEducation(Education education)
+    {
+        _context.Educations.Update(education);
+      await  _context.SaveChangesAsync();
+    }
+
+    public  Task<Education> GetAnEducationByIdAsync(int educationId)
+    {
+       return _context.Educations.FirstOrDefaultAsync(e=> e.Id == educationId);
+    }
+
+    public List<Education> GetListOfEducations()
 	{
 		return _context.Educations.ToList();
 

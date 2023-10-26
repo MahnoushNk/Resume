@@ -8,5 +8,7 @@ namespace Resume.Domain.RepositoryInterface
 	{
 		Task AddContactUsToTheDataBase(ContactUs contact);
 		Task AddLocationToTheDataBase(ContactUsLocation location);
+		
+		
 	}
 }

@@ -1,26 +1,27 @@
-﻿using Resume.Domain.Models.Entities.Educations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Resume.Application.DTO.AdminSide.Education;
+using Resume.Domain.Models.Entities.Educations;
 
 namespace Resume.Application.Services.Interfaces
 {
-   public interface IEducationService
-    {
-       Task<List<Education>> GetListOfEducationsAsync();
-        List<Education> GetListOfEducations();
+	public interface IEducationService
+	{
+		List<Education> GetListOfEducations();
 
-        Task CreateAnEducationAsync(Education education);
-        void CreateAnEducation(Education education);
+		List<ListOfEducationsAdminSideDTO> GetListOfEducationsAdminPanel();
 
-        Task DeleteAnEducationAsync(int eucationId);
+		Task AddEducationToDataBase(CreateAnEducationAdminSideDTO model);
 
-        void DeleteAnEducation(int eucationId);
+		Task<Education>  GetAnEducationByIdAsync(int Id);
 
-        Task<Education>  GetAnEducationByIdAsync (int eucationId);
-        Education GetAnEducationById(int eucationId);
+		Task EditAnEducation(Education education);
+        Task DeleteAnEducation(Education education);
+
+
+
+
     }
+
+
 }
-    

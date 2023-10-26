@@ -6,9 +6,19 @@ namespace Resume.Domain.RepositoryInterface
 {
 	public interface IEducationRepository
 	{
-		//GetListOfEducations
-
 		List<Education> GetListOfEducations();
 
-	}
+		Task  AddEducationTotDataBase(Education education);
+
+        Task<Education> GetAnEducationByIdAsync(int educationId);
+
+        Task EditAnEducation(Education education);
+
+		Task DeleteAnEducation(Education education);
+
+
+
+
+
+    }
 }

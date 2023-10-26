@@ -1,4 +1,6 @@
 
+using Resume.Application.Services.Implementation;
+using Resume.Application.Services.Interfaces;
 using Resume.Domain.RepositoryInterface;
 using Resume.Infrastructure.Repository;
 using Resume.Presentation.Models.Entities.ResumeDbContext;
@@ -14,14 +16,29 @@ namespace Resume.Presentation
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<IEducationRepository, EducationRepository>();
+			#region Repositories
+
+			builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 			builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 			builder.Services.AddScoped<IMySkillsRepository, MySkillsRepository>();
 			builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
 
 			builder.Services.AddDbContext<ResumeDbContext>();
-          
-            var app = builder.Build();
+			#endregion
+
+			#region Services
+
+			builder.Services.AddScoped<IContactUsService, ContactUsService>();
+			builder.Services.AddScoped<IDashboardService, DashboardService>();
+			builder.Services.AddScoped<IEducationService, EducationService>();
+			builder.Services.AddScoped<IExperienceService, ExperienceService>();
+			builder.Services.AddScoped<IMySkillsService, MySkillsService>();
+
+
+			#endregion
+
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -37,6 +54,10 @@ namespace Resume.Presentation
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.MapControllerRoute(
+                 name: "areas",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

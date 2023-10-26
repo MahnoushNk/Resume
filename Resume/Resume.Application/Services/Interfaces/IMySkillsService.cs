@@ -1,18 +1,18 @@
 ﻿
-
 using Resume.Domain.Models.Entities.MySkills;
 
-namespace Resume.Domain.RepositoryInterface
+namespace Resume.Application.Services.Interfaces
 {
-	public interface IMySkillsRepository
+	public interface IMySkillsService
 	{
 		List<MySkill> GetLIstOfMySkills();
-
 		Task AddMySkillToTheDatabase(MySkill skill);
+
 		Task<MySkill> GetMySkillByIdAsync(int mySkillId);
 
-		Task EditMySkill(MySkill mySkill);
+		Task EditMySkill(MySkill myskill);
 
-        Task DeleteMySkill(MySkill mySkill);
+        Task DeleteMySkill(MySkill myskill);
+
     }
 }
